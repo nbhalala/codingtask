@@ -6,7 +6,7 @@ import(
 	"os"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
-	"github.com/nbhalala/codingtask/routes"
+	"github.com/nbhalala/codingtask/api/routes"
 	"github.com/joho/godotenv"
 )
 
