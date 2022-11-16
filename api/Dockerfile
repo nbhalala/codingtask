@@ -6,7 +6,7 @@ ADD . /build/
 
 WORKDIR /build
 
-RUN go mod init github.com/nbhalala/codingtask
+#RUN go mod init github.com/nbhalala/codingtask
 
 RUN go build -o main.
 
