@@ -3,8 +3,8 @@ package routes
 import(
 	"os"
 	"strconv"
-	"github.com/nbhalala/codingtask/database"
-	"github.com/nbhalala/codingtask/helpers"
+	"github.com/nbhalala/codingtask/api/database"
+	"github.com/nbhalala/codingtask/api/helpers"
 	"github.com/go-redis/redis/v8"
 	"github.com/gofiber/fiber/v2"
 	"github.com/asaskevich/govalidator"
