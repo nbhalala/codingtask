@@ -58,13 +58,13 @@ func urlShorten(c *fiber.Ctx) error {
 	}
 
 	err = r.set(database.Ctx, id, body.URL).Err()
-	if err !+ nil {
+	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error":"Unable to connect to the Server."})
 	}
 
 	resp := response{
 		URL:			body.URL,
-		CustomShort:	""
+		CustomShort:	"",
 	}
 
 	resp.CustomShort = os.Getenv("APP_DOMAIN") + "/" + id
