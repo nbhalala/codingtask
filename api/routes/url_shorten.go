@@ -2,22 +2,22 @@ package routes
 
 import(
 	"os"
-	"strconv"
+	//"strconv"
 	"github.com/nbhalala/codingtask/api/database"
 	"github.com/nbhalala/codingtask/api/helpers"
-	"github.com/go-redis/redis/v8"
+	//"github.com/go-redis/redis/v8"
 	"github.com/gofiber/fiber/v2"
 	"github.com/asaskevich/govalidator"
 	"github.com/google/uuid"
 )
 
 type request struct {
-	URL			string		`json:"url"`
+	URL		string		`json:"url"`
 	CustomShort	string		`json:"short"`
 }
 
 type response struct {
-	URL			string		`json:"url"`
+	URL		string		`json:"url"`
 	CustomShort	string		`json:"short"`
 }
 
@@ -49,21 +49,22 @@ func urlShorten(c *fiber.Ctx) error {
 		id = body.CustomShort
 	}
 
-	r := database.createClient(0)
+	r := database.CreateClient(0)
 	defer r.Close()
 
-	val, _ = r.Get(database.Ctx, id).Result()
-	if val != ""{
-		return c.Status(fiber.StatusForbidden).JSON(fiber.Map{"error":"URL custom short is already in use."})
-	}
+	val, err = r.Get(database.Ctx, id).Result()
+	fmt.Println(val)
+	//if val != ""{
+	//	return c.Status(fiber.StatusForbidden).JSON(fiber.Map{"error":"URL custom short is already in use."})
+	//}
 
 	err = r.set(database.Ctx, id, body.URL).Err()
-	if err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error":"Unable to connect to the Server."})
-	}
+	//if err != nil {
+	//	return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error":"Unable to connect to the Server."})
+	//}
 
 	resp := response{
-		URL:			body.URL,
+		URL:		body.URL,
 		CustomShort:	"",
 	}
 
