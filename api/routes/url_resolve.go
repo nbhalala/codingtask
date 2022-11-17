@@ -6,7 +6,7 @@
 package routes
 
 import (
-	"github.com/nbhalala/codingtask/api/database"
+	"github.com/nbhalala/codingtask/database"
 	"github.com/go-redis/redis/v8"
 	"github.com/gofiber/fiber/v2"
 )
@@ -19,7 +19,7 @@ func urlResolve(c *fiber.Ctx) error {
 
 	value, err := r.Get(database.Ctx, url).Result()
 	if err == redis.Nil {
-		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error":"Short not found in the Database."})
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error":"Shorten URL not found in the Database."})
 	}
 
 	rInr := database.CreateClient(1)
