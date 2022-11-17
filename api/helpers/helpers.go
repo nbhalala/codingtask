@@ -1,10 +1,16 @@
+/*
+ * Verifications : helpers
+ * Here we cad add all different kinds of verifications (e.g. Invalid Domain)
+ */
+
 package helpers
 
-import(
+import (
 	"os"
 	"strings"
 )
 
+// Verify the URL
 func RemoveDomainError(url string) bool {
 
 	if url == os.Getenv("APP_DOMAIN"){
