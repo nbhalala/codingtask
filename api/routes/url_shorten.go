@@ -49,12 +49,18 @@ func urlShorten(c *fiber.Ctx) error {
 	// Generate Unique ID
 	var id string
 	id = uuid.New().String()[:6]
+	
+	r := database.CreateClient(0)
+	defer r.Close()
 
 	// Add verification : Shortne URL is already exists/in-use
 	// TBD	
 	
 	// Add verification : Server Connection
-	// TBD
+	err := r.Set(database.Ctx, id, body.URL, 24*3600*time.Second).Err()
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error":"Unable to connect to server"})
+	}
 		
 	// API Response
 	resp := response{
