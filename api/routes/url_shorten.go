@@ -2,10 +2,8 @@ package routes
 
 import(
 	"os"
-	//"strconv"
-	"github.com/nbhalala/codingtask/api/database"
-	"github.com/nbhalala/codingtask/api/helpers"
-	//"github.com/go-redis/redis/v8"
+	"github.com/nbhalala/codingtask/database"
+	"github.com/nbhalala/codingtask/helpers"
 	"github.com/gofiber/fiber/v2"
 	"github.com/asaskevich/govalidator"
 	"github.com/google/uuid"
@@ -13,12 +11,12 @@ import(
 
 type request struct {
 	URL		string		`json:"url"`
-	CustomShort	string		`json:"short"`
+	ShortURL	string		`json:"short"`
 }
 
 type response struct {
 	URL		string		`json:"url"`
-	CustomShort	string		`json:"short"`
+	ShortURL	string		`json:"short"`
 }
 
 func urlShorten(c *fiber.Ctx) error {
@@ -43,32 +41,22 @@ func urlShorten(c *fiber.Ctx) error {
 
 	var id string
 
-	if body.CustomShort == ""{
-		id = uuid.New().String()[:6]
-	} else {
-		id = body.CustomShort
-	}
+	id = uuid.New().String()[:6]
 
-	r := database.CreateClient(0)
-	defer r.Close()
-
-	val, err = r.Get(database.Ctx, id).Result()
-	fmt.Println(val)
-	//if val != ""{
-	//	return c.Status(fiber.StatusForbidden).JSON(fiber.Map{"error":"URL custom short is already in use."})
-	//}
-
-	err = r.set(database.Ctx, id, body.URL).Err()
-	//if err != nil {
-	//	return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error":"Unable to connect to the Server."})
-	//}
-
+	// Add verification : Shortne URL is already exists/in-use
+	// TBD	
+	
+	// Add verification : Server Connection
+	// TBD
+		
+	// API Response
 	resp := response{
 		URL:		body.URL,
-		CustomShort:	"",
+		ShortURL:	"",
 	}
 
-	resp.CustomShort = os.Getenv("APP_DOMAIN") + "/" + id
+	resp.ShortURL = os.Getenv("APP_DOMAIN") + "/" + id
 
+	// StatusOK: 200
 	return c.Status(fiber.StatusOK).JSON(resp)
 }
