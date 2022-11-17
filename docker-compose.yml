@@ -1,7 +1,17 @@
+# Docker-Compose YAML File: Define services, networks, and volumes for a Docker Application.
+# References:
+# 1. Docker Docs: https://docs.docker.com/compose/compose-file/
+
+# Version property for backward compatibility
 version: "3"
 
+#############################################################################################
+# build: Build configuration for creating container image from source
+# ports: Exposes container ports
+# depends_on: expresses dependencies between services
+# volumes: named volumes that accessible by service containers
+#############################################################################################
 services:
-
   api:
     build: api
     ports:
