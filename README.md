@@ -81,9 +81,20 @@ docker-compose up
 
 GO Commands:
 
-go mod tidy ensures that the go.mod file matches the source code in the module. It adds any missing module requirements necessary to build the current module’s packages and dependencies, and it removes requirements on modules that don’t provide any relevant packages. It also adds any missing entries to go.sum and removes unnecessary entries.
+Go command that ensures that the go.mod file matches the source code in the module. It adds any missing module requirements necessary to build the current module’s packages and dependencies, and it removes requirements on modules that don’t provide any relevant packages. It also adds any missing entries to go.sum and removes unnecessary entries.
 ```
 go mod tidy
+```
+
+Go command that initializes and writes a new go.mod file in the current directory, in effect creating a new module rooted at the current directory. The go.mod file must not already exist.
+
+```
+go mod init
+```
+
+Go command with flag "-modcache" causes go clean to remove the entire module cache, including unpacked source code of versioned dependencies.
+```
+go clean -modcache
 ```
 
 ## Compiling the App
