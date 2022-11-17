@@ -33,9 +33,7 @@ func main() {
 	}
 
 	app := fiber.New()
-
 	app.Use(logger.New())
-
 	SetupRoutes(app)
 
 	log.Fatal(app.Listen(os.Getenv("APP_PORT")))
