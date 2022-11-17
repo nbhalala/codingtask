@@ -10,7 +10,7 @@ ADD . /build/
 WORKDIR /build
 
 # Build the binary
-RUN go build -o main.
+RUN go build -o main .
 
 #################################################################################################################
 # Build a small image
