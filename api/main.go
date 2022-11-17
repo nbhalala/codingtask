@@ -1,6 +1,13 @@
+/*
+ * Main package for executable commands
+ * References:
+ * 1. Fiber: https://docs.gofiber.io/api/app
+ */
+
 package main
 
-import(
+// Importing packages from remote modules
+import (
 	"fmt"
 	"log"
 	"os"
@@ -10,12 +17,16 @@ import(
 	"github.com/joho/godotenv"
 )
 
-func createRoutes(app *fiber.App){
+// Routing: Fiber's component Feature
+// Function Signature: app.Method(path string, ...func(*fiber.Ctx))
+func SetupRoutes(app *fiber.App) {
+	// Routes
 	app.Get("/:url", routes.urlResolve)
 	app.Post("/api/v1", routes.urlShorten)
 }
 
-func main(){
+// main function
+func main() {
 	err := godotenv.Load()
 	if err != nil {
 		fmt.Println(err)
@@ -25,7 +36,7 @@ func main(){
 
 	app.Use(logger.New())
 
-	createRoutes(app)
+	SetupRoutes(app)
 
 	log.Fatal(app.Listen(os.Getenv("APP_PORT")))
 }
