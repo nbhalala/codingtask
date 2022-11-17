@@ -35,17 +35,21 @@ It is expected that this application will be built on go 1.16. I've been using a
 
 ## Usage
 
-```
 Using Postman:
-```
 
+```
 POST http://localhost:8000/api/v1/
+```
   
   Body:
+  ```
   {"url":"https://www.capgemini.com"}
+  ```
 
 Response:
+  ```
   {
     "url": "https://www.capgemini.com"
     "short": "localhost:8000/<ID>"
   }
+  ```
