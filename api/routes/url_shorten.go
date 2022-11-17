@@ -1,6 +1,12 @@
+/*
+ * Route: Shorten URL
+ * Generate an UUID to create a Shorten URL from the original URL
+ * Also, have additional verifications (e.g. Invalid URL, Invalid Domain, JSON Parse Error, etc)
+ */
+
 package routes
 
-import(
+import (
 	"os"
 	"github.com/nbhalala/codingtask/database"
 	"github.com/nbhalala/codingtask/helpers"
@@ -9,11 +15,13 @@ import(
 	"github.com/google/uuid"
 )
 
+// API REQUEST
 type request struct {
 	URL		string		`json:"url"`
 	ShortURL	string		`json:"short"`
 }
 
+// API RESPONSE
 type response struct {
 	URL		string		`json:"url"`
 	ShortURL	string		`json:"short"`
@@ -23,24 +31,23 @@ func urlShorten(c *fiber.Ctx) error {
 
 	body := new(request)
 
+	//Verify the JSON Parse
 	if err := c.BodyParser(&body); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error":"Cannot parse JSON."})
 	}
 
 	//Verify the URL
-
-	if !govalidator.IsURL(body.URL){
+	if !govalidator.IsURL(body.URL) {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error":"Invalid URL."})
 	}
 
-	//Verify Domain Error
-
+	//Verify the Domain
 	if !helpers.RemoveDomainError(body.URL){
 		return c.Status(fiber.StatusServiceUnavailable).JSON(fiber.Map{"error":"Invalid Domain."})
 	}
 
+	// Generate Unique ID
 	var id string
-
 	id = uuid.New().String()[:6]
 
 	// Add verification : Shortne URL is already exists/in-use
