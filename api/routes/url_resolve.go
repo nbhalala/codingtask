@@ -1,6 +1,11 @@
+/*
+ * Route: Resolve URL
+ * Verify the generated Shorten URL does exist in the database.
+ */
+
 package routes
 
-import(
+import (
 	"github.com/nbhalala/codingtask/api/database"
 	"github.com/go-redis/redis/v8"
 	"github.com/gofiber/fiber/v2"
@@ -13,11 +18,9 @@ func urlResolve(c *fiber.Ctx) error {
 	defer r.Close()
 
 	value, err := r.Get(database.Ctx, url).Result()
-	if err == redis.Nil{
+	if err == redis.Nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error":"Short not found in the Database."})
-	} //else if err != nil {
-	//	return c.Status(fiber.StatusInternalError).JSON(fiber.Map{"error":"Cannot connect to the Database."})
-	//}
+	}
 
 	rInr := database.CreateClient(1)
 	defer rInr.Close()
