@@ -17,21 +17,77 @@ We'd like you to write a simple URL shortener microservice, similar to [tinyurl.
 7. Dependencies (Packages)
 
 ## Setting up the build environment
-- TBD
+Installation & Configuration
+
+Using Windows Powershell (As an administrator)
+- Installing Virtual Machine Platform
+- Installing Windows Subsystem for Linux (WSL V2)
+- Downloading & Installing WSL Kernel
+- Downloading & Installing GUI App Support
+- Downloading & Installing Ubuntu (20.04 LTS Linux distribution)
+```
+wsl --install
+```
+
+Using Windows Powershell (As an administrator)
+- Start WSL (dev/build environment)
+```
+Windows PowerShell
+PS C:\Users\nbhalala> wsl
+naresh@LNAR-5CG0338GPC:/mnt/c/Users/nbhalala$
+naresh@LNAR-5CG0338GPC:/mnt/c/Users/nbhalala$ cd /home/naresh/codingtask/
+naresh@LNAR-5CG0338GPC:~/codingtask$
+```
+
+Use MS Visual Studio (IDE) for Coding
+- Start IDE
+```
+naresh@LNAR-5CG0338GPC:~/codingtask$ code . &
+```
+
+Install other tools/software
+```
+sudo apt update
+sudo apt install docker.io -y
+sudo apt install docker-compose -y
+sudo apt install golang-go -y
+```
+
+Go Environment (GOPATH, GOROOT, etc)
+```
+$ go env
+$ go env GOPATH
+$ go env GOROOT
+$ go env GO111MODULE
+```
+
+Docker Commands:
+
+Stops containers and removes containers, networks, volumes, and images created by up.
+```
+docker-compose down
+```
+
+Verify docker Configuration.
+```
+docker-compose config
+```
+
+
+Builds, (re)creates, starts, and attaches to containers for a service.
+```
+docker-compose up
+```
+
+GO Commands:
+
+go mod tidy ensures that the go.mod file matches the source code in the module. It adds any missing module requirements necessary to build the current module’s packages and dependencies, and it removes requirements on modules that don’t provide any relevant packages. It also adds any missing entries to go.sum and removes unnecessary entries.
+```
+go mod tidy
+```
 
 ## Compiling the App
 - TBD
-
-## Aim of this coding task
-- TBD
-
-## TODO
-- TBD
-
-
-## Building
-- TBD
-It is expected that this application will be built on go 1.16. I've been using an alpine base.
 
 ## Usage
 
